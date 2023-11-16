@@ -1,0 +1,22 @@
+name: S3 Sync Mushi
+
+on:
+  push:
+    branches:
+      - main  # Set a branch to deploy
+
+jobs:
+  build:
+  runs-on: ubuntu-latest
+  steps:
+  - uses: actions/checkout@v1
+  - names: Configure AWS Credentials 
+    uses: aws-actions/configure-aws-credentials@v1
+    with:
+      aws-acces-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }} 
+      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} 
+      aws-region: us-east-1
+  - name: Deploy Content to S3
+    run: aws s3 sync . s3://hell-ya-mushi --delete
+    "Resource": "arn:aws:s3:::hell-ya-mushi"
+ 

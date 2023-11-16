@@ -18,4 +18,5 @@ jobs:
         aws-region: us-east-1
     - name: Deploy Content to S3
       run: aws s3 sync . s3://hell-ya-mushi --delete
+      "Resource": "arn:aws:s3:::hell-ya-mushi/*"
  
